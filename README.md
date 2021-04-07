@@ -1,5 +1,7 @@
 # naturkunde.museum
 
+Queries wikidata (museum.php) for museums of natural history and displays the results.
+
 ## Project setup
 ```
 yarn install
