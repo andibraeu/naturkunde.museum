@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <Museums />
+    <div class="app-container">
+      <Museums />
+    </div>
   </div>
 </template>
 
@@ -20,9 +22,17 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
   margin-top: 60px;
+}
+body{
+margin: 0;
+height: 100%;
+overflow-x: hidden;
+overflow-y: auto;
+background-color: var(--surface-b);
+font-family: var(--font-family);
+font-weight: 400;
+color: var(--text-color);
 }
 .museum-image {
   height: 50px;

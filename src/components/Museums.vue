@@ -1,56 +1,51 @@
 <template>
   <h1>Naturkundemuseen in Deutschland</h1>
+  <DataTable :value="museums" stripedRows responsiveLayout="scroll">
+    <Column header="Bild/Logo">
+      <template #body="slotProps">
+        <img v-if="slotProps.data.logo" :src="slotProps.data.logo" alt="Logo des Museums" class="museum-image" />
+        <img v-else-if="slotProps.data.image" :src="slotProps.data.image" alt="Ein Bild des Museums" class="museum-image" />
+      </template>
+    </Column>
+    <Column header="Name" field="name" :sortable="true">
+      <template #body="slotProps1">
+        <a v-if="slotProps1.data.website" :href="slotProps1.data.website" target="_blank">
+          {{slotProps1.data.name}}
+        </a>
+        <span v-else>{{ slotProps1.data.name }}</span>
+      </template>
+    </Column>
+    <Column field="address" header="Adresse"></Column>
+    <Column header="Kontakt">
+      <template #body="slotProps">
+        <a v-if="slotProps.data.phone" :href="'phone:' + slotProps.data.phone" target="_blank">
+          <fa-layers class="fa-lg">
+            <fa :icon="['fas', 'square']"></fa>
+            <fa :icon="['fas', 'phone']" class="fa-inverse" transform="shrink-6"></fa>
+          </fa-layers>
+        </a>
+        <a v-if="slotProps.data.facebook" :href="'https://facebook.com/' + slotProps.data.facebook" target="_blank">
+          <fa-layers class="fa-lg">
+            <fa :icon="['fas', 'square']"></fa>
+            <fa :icon="['fab', 'facebook-f']" class="fa-inverse" transform="shrink-6"></fa>
+          </fa-layers>
+        </a>
+        <a v-if="slotProps.data.twitter" :href="'https://twitter.com/' + slotProps.data.twitter" target="_blank">
+          <fa-layers class="fa-lg">
+            <fa :icon="['fas', 'square']"></fa>
+            <fa :icon="['fab', 'twitter']" class="fa-inverse" transform="shrink-6"></fa>
+          </fa-layers>
+        </a>
+        <a v-if="slotProps.data.email" :href="'mailto:' + slotProps.data.email" target="_blank">
+          <fa-layers class="fa-lg">
+            <fa :icon="['fas', 'square']"></fa>
+            <fa :icon="['fas', 'paper-plane']" class="fa-inverse" transform="shrink-6"></fa>
+          </fa-layers>
+        </a>
+      </template>
+    </Column>
+  </DataTable>
   <div>
-    <table>
-      <tr>
-        <th>Bild/Logo</th>
-        <th>Name</th>
-        <th>Adresse</th>
-        <th>Kontakt</th>
-      </tr>
-      <tr v-for="museum in museums" :key="museum">
-        <td v-if="museum.logo"><img :src="museum.logo" class="museum-image"></td>
-        <td v-else-if="museum.image"><img :src="museum.image" class="museum-image"></td>
-        <td v-else></td>
-        <td v-if="museum.name">
-          <a v-if="museum.website" :href="museum.website" target="_blank">
-            {{museum.name}}
-          </a>
-          <span v-else>{{ museum.name }}</span>
-        </td>
-        <td v-else>no name</td>
-        <td v-if="museum.address">{{ museum.address }}</td>
-        <td v-else></td>
-        <td>
-          <a v-if="museum.phone" :href="'phone:' + museum.phone" target="_blank">
-            <fa-layers class="fa-lg">
-              <fa :icon="['fas', 'square']"></fa>
-              <fa :icon="['fas', 'phone']" class="fa-inverse" transform="shrink-6"></fa>
-            </fa-layers>
-          </a>
-          <a v-if="museum.facebook" :href="'https://facebook.com/' + museum.facebook" target="_blank">
-            <fa-layers class="fa-lg">
-              <fa :icon="['fas', 'square']"></fa>
-              <fa :icon="['fab', 'facebook-f']" class="fa-inverse" transform="shrink-6"></fa>
-            </fa-layers>
-          </a>
-          <a v-if="museum.twitter" :href="'https://twitter.com/' + museum.twitter" target="_blank">
-            <fa-layers class="fa-lg">
-              <fa :icon="['fas', 'square']"></fa>
-              <fa :icon="['fab', 'twitter']" class="fa-inverse" transform="shrink-6"></fa>
-            </fa-layers>
-          </a>
-          <a v-if="museum.email" :href="'mailto:' + museum.email" target="_blank">
-            <fa-layers class="fa-lg">
-              <fa :icon="['fas', 'square']"></fa>
-              <fa :icon="['fas', 'paper-plane']" class="fa-inverse" transform="shrink-6"></fa>
-            </fa-layers>
-          </a>
-        </td>
-      </tr>
-
-    </table>
-
   </div>
 </template>
 
@@ -71,13 +66,16 @@ export default {
           isLoading.value = true;
 
           const { data } = await axios.get('https://naturkunde.museum/data/data.json');
-          museums.value = data.results.bindings.reduce(function(accum, currentVal) {
+          var museumsObject = data.results.bindings.reduce(function(accum, currentVal) {
             accum[currentVal.item.value] = Object.keys(currentVal).reduce(function(value, key) {
               value[key] = currentVal[key].value;
               return value;
             }, {});
             return accum;
           }, {});
+          for (var museum in museumsObject) {
+            museums.value.push(museumsObject[museum])
+          }
 
         } catch (err) {
           // handle error here
