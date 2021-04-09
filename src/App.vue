@@ -37,4 +37,13 @@ color: var(--text-color);
 .museum-image {
   height: 50px;
 }
+button.contacts {
+  margin-right: 10px;
+}
+a.contact-items, a.contact-items:visited {
+  text-decoration: none;
+}
+span.pi {
+  font-size: 1.2rem;
+}
 </style>

@@ -32,7 +32,7 @@ class SPARQLQueryDispatcher
 $endpointUrl = 'https://query.wikidata.org/sparql';
 $sparqlQueryString = <<< 'SPARQL'
 #Alle naturkundemussen in Deutschland
-SELECT DISTINCT ?item ?name ?lat ?lon ?website ?phone ?email ?twitter ?facebook ?image ?logo ?address WHERE {
+SELECT DISTINCT ?item ?name ?lat ?lon ?website ?phone ?email ?twitter ?facebook ?image ?logo ?address ?thumb WHERE {
   hint:Query hint:optimizer "None".
   ?item (wdt:P131*) wd:Q183;
     (wdt:P31/(wdt:P279*)) wd:Q1970365;
@@ -52,6 +52,12 @@ SELECT DISTINCT ?item ?name ?lat ?lon ?website ?phone ?email ?twitter ?facebook 
   OPTIONAL { ?item wdt:P968 ?email. }
   OPTIONAL { ?item wdt:P6375 ?address. }
   OPTIONAL { ?item wdt:P154 ?logo. }
+
+  BIND(REPLACE(wikibase:decodeUri(STR(?image)), "http://commons.wikimedia.org/wiki/Special:FilePath/", "") as ?fileName) .
+  BIND(REPLACE(?fileName, " ", "_") as ?safeFileName)
+  BIND(MD5(?safeFileName) as ?fileNameMD5) .
+  BIND(CONCAT("https://upload.wikimedia.org/wikipedia/commons/thumb/", SUBSTR(?fileNameMD5, 1, 1), "/", SUBSTR(?fileNameMD5, 1, 2), "/", ?safeFileName, "/150px-", ?safeFileName) as ?thumb)
+
 }
 ORDER BY (?name)
 SPARQL;

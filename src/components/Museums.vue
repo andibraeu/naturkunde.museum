@@ -4,6 +4,7 @@
     <Column header="Bild/Logo">
       <template #body="slotProps">
         <img v-if="slotProps.data.logo" :src="slotProps.data.logo" alt="Logo des Museums" class="museum-image" />
+        <img v-else-if="slotProps.data.thumb" :src="slotProps.data.thumb" alt="Ein Bild des Museums" class="museum-image" />
         <img v-else-if="slotProps.data.image" :src="slotProps.data.image" alt="Ein Bild des Museums" class="museum-image" />
       </template>
     </Column>
@@ -18,29 +19,17 @@
     <Column field="address" header="Adresse"></Column>
     <Column header="Kontakt">
       <template #body="slotProps">
-        <a v-if="slotProps.data.phone" :href="'phone:' + slotProps.data.phone" target="_blank">
-          <fa-layers class="fa-lg">
-            <fa :icon="['fas', 'square']"></fa>
-            <fa :icon="['fas', 'phone']" class="fa-inverse" transform="shrink-6"></fa>
-          </fa-layers>
+        <a v-if="slotProps.data.phone" :href="'phone:' + slotProps.data.phone" target="_blank" class="contact-items">
+          <Button icon="pi pi-phone" class="p-button-raised p-mr-2 p-mb-2 contacts" />
         </a>
-        <a v-if="slotProps.data.facebook" :href="'https://facebook.com/' + slotProps.data.facebook" target="_blank">
-          <fa-layers class="fa-lg">
-            <fa :icon="['fas', 'square']"></fa>
-            <fa :icon="['fab', 'facebook-f']" class="fa-inverse" transform="shrink-6"></fa>
-          </fa-layers>
+        <a v-if="slotProps.data.facebook" :href="'https://facebook.com/' + slotProps.data.facebook" target="_blank" class="contact-items">
+          <Button icon="pi pi-facebook" class="p-button-raised p-mr-2 p-mb-2 contacts" />
         </a>
-        <a v-if="slotProps.data.twitter" :href="'https://twitter.com/' + slotProps.data.twitter" target="_blank">
-          <fa-layers class="fa-lg">
-            <fa :icon="['fas', 'square']"></fa>
-            <fa :icon="['fab', 'twitter']" class="fa-inverse" transform="shrink-6"></fa>
-          </fa-layers>
+        <a v-if="slotProps.data.twitter" :href="'https://twitter.com/' + slotProps.data.twitter" target="_blank" class="contact-items">
+          <Button icon="pi pi-twitter" class="p-button-raised p-mr-2 p-mb-2 contacts" />
         </a>
-        <a v-if="slotProps.data.email" :href="'mailto:' + slotProps.data.email" target="_blank">
-          <fa-layers class="fa-lg">
-            <fa :icon="['fas', 'square']"></fa>
-            <fa :icon="['fas', 'paper-plane']" class="fa-inverse" transform="shrink-6"></fa>
-          </fa-layers>
+        <a v-if="slotProps.data.email" :href="'mailto:' + slotProps.data.email" target="_blank" class="contact-items">
+          <Button icon="pi pi-envelope" class="p-button-raised p-mr-2 p-mb-2 contacts" />
         </a>
       </template>
     </Column>
