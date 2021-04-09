@@ -2,6 +2,8 @@
 
 Queries wikidata (museum.php) for museums of natural history and displays the results.
 
+Create a cron job calling `museum.php` to gather data from wikidata regularly.
+
 ## Project setup
 ```
 yarn install
