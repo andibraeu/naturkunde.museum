@@ -2867,10 +2867,10 @@ core-js-compat@^3.25.1, core-js-compat@^3.6.5:
   dependencies:
     browserslist "^4.21.4"
 
-core-js@3.10.0, core-js@^3.6.5:
-  version "3.10.0"
-  resolved "https://registry.npmjs.org/core-js/-/core-js-3.10.0.tgz"
-  integrity sha512-MQx/7TLgmmDVamSyfE+O+5BHvG1aUGj/gHhLn1wVtm2B5u1eVIPvh7vkfjwWKNCjrTJB8+He99IntSQ1qP+vYQ==
+core-js@3.25.5, core-js@^3.6.5:
+  version "3.25.5"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-3.25.5.tgz"
+  integrity sha512-nbm6eZSjm+ZuBQxCUPQKQCoUEfFOXjUZ8dTTyikyKaWrTYmAVbykQfwsKE5dBK88u3QCkCrzsx/PPlKfhsvgpw==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
