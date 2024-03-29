@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "core-js": "3.27.0",
-    "primeicons": "6.0.1",
+    "primeicons": "7.0.0",
     "primevue": "3.21.0",
     "vue": "3.2.45"
   },
