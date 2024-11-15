@@ -11,13 +11,13 @@
     "core-js": "3.27.0",
     "primeicons": "6.0.1",
     "primevue": "3.21.0",
-    "vue": "3.2.45"
+    "vue": "3.5.13"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "5.0.8",
     "@vue/cli-plugin-eslint": "5.0.8",
     "@vue/cli-service": "5.0.8",
-    "@vue/compiler-sfc": "3.2.45",
+    "@vue/compiler-sfc": "3.5.13",
     "axios": "1.2.1",
     "babel-eslint": "10.1.0",
     "eslint": "8.30.0",
