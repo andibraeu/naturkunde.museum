@@ -1,5 +1,7 @@
 # naturkunde.museum
 
+That project ended in April 2024. 
+
 Queries wikidata (museum.php) for museums of natural history and displays the results.
 
 Create a cron job calling `museum.php` to gather data from wikidata regularly.
